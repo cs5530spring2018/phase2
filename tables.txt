@@ -31,7 +31,7 @@ CREATE TABLE CarFeedback (
 	reviewer varchar(32) NOT NULL,
 	car varchar(32) NOT NULL,
 	rating int NOT NULL,
-	comment varchar(255)
+	comment varchar(255),
 	PRIMARY KEY (reviewer, car),
 	FOREIGN KEY (reviewer) REFERENCES UberUser(login),
 	FOREIGN KEY (car) REFERENCES UberCar(vin)
@@ -41,9 +41,9 @@ CREATE TABLE ScoredFB (
 	reviewee varchar(32) NOT NULL,
 	car varchar(32) NOT NULL,
 	reviewer varchar(32) NOT NULL,
-	usefulness_score int NOT NULL
+	usefulness_score int NOT NULL,
 	PRIMARY KEY (reviewee, car, reviewer),
-	FOREIGN KEY (reviewee, car) REFERENCES CarFeedback(reviewer, car)
+	FOREIGN KEY (reviewee, car) REFERENCES CarFeedback(reviewer, car),
 	FOREIGN KEY (reviewer) REFERENCES UberUser(login)
 );
 
@@ -58,7 +58,7 @@ CREATE TABLE Trusts (
 
 CREATE TABLE Favorites (
 	user varchar(32) NOT NULL,
-	car varchar(32) NOT NULL
+	car varchar(32) NOT NULL,
 	PRIMARY KEY (user, car),
 	FOREIGN KEY (user) REFERENCES UberUser(login),
 	FOREIGN KEY (car) REFERENCES UberCar(vin)	
@@ -69,8 +69,8 @@ CREATE TABLE Reserve (
 	car varchar(32) NOT NULL,
 	time datetime NOT NULL,
 	PRIMARY KEY (user, car, time),
-	FOREIGN KEY (user) REFERENCES UberUser,
-	FOREIGN KEY (car) REFERENCES UberCar
+	FOREIGN KEY (user) REFERENCES UberUser(login),
+	FOREIGN KEY (car) REFERENCES UberCar(vin)
 );
 
 CREATE TABLE HoursOfOp (
@@ -83,15 +83,15 @@ CREATE TABLE HoursOfOp (
 );
 
 CREATE TABLE Ride (
-	rid int NOT NULL AUTO INCREMENT,
+	rid int NOT NULL AUTO_INCREMENT,
 	rider varchar(32) NOT NULL,
 	car varchar(32) NOT NULL,
 	num_riders int NOT NULL DEFAULT 1,
 	cost decimal(13, 2) NOT NULL DEFAULT 0.00,
 	distance decimal(13, 2) NOT NULL DEFAULT 0.00,
 	date datetime NOT NULL,
-	to varchar(128) NOT NULL,
-	from varchar(128) NOT NULL,
+	to_address varchar(128) NOT NULL,
+	from_address varchar(128) NOT NULL,
 	PRIMARY KEY (rid),
 	FOREIGN KEY (rider) REFERENCES UberUser(login),
 	FOREIGN KEY (car) REFERENCES UberCar(vin)
