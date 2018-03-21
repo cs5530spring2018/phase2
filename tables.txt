@@ -31,7 +31,7 @@ CREATE TABLE CarFeedback (
 	reviewer varchar(32) NOT NULL,
 	car varchar(32) NOT NULL,
 	rating int NOT NULL,
-	comment varchar(256)
+	comment varchar(255)
 	PRIMARY KEY (reviewer, car),
 	FOREIGN KEY (reviewer) REFERENCES UberUser(login),
 	FOREIGN KEY (car) REFERENCES UberCar(vin)

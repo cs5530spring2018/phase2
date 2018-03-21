@@ -28,10 +28,26 @@ public class TestConnector2 {
         String dname;
         String sql=null;
         int c=0;
+
+		String hostname;
+		String username;
+		String password;
+		String dbName;
+
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter server hostname: ");
+		hostname = sc.next();
+		System.out.println("Enter username: ");
+		username = sc.next();
+		System.out.println("Enter password: ");
+		password = sc.next();
+		System.out.println("Enter db name: ");
+		dbName = sc.next();
+
          try
 		 {
 			//remember to replace the password
-			 	 con= new Connector2();
+			 	 con= new Connector2(hostname, username, password, dbName);
 	             System.out.println ("Database connection established");
 	         
 	             BufferedReader in = new BufferedReader(new InputStreamReader(System.in));

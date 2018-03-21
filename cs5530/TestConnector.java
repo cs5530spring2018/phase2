@@ -8,9 +8,23 @@ public class TestConnector {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+
+		String hostname;
+		String username;
+		String password;
+		String dbName;
+
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter server hostname: ");
+		hostname = sc.next();
+		System.out.println("Enter username: ");
+		username = sc.next();
+		System.out.println("Enter password: ");
+		password = sc.next();
+		System.out.println("Enter db name: ");
+		dbName = sc.next();
 		try{
-			Connector con= new Connector();
+			Connector con= new Connector(hostname, username, password, dbname);
 			Order order= new Order();
 			
 			String result=order.getOrders("login", "user1", con.stmt);
